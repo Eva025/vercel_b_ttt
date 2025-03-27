@@ -31,8 +31,9 @@ def me():
 
 @app.route("/welcome", methods=["GET"])
 def welcome():
-    user = request.args.get("nick")  # 改為使用 request.args.get() 獲取 GET 參數
-    return render_template("welcome.html", name=user)
+    user = request.values.get("nick")
+    work = request.values.get("work")
+    return render_template("welcome.html", name=user, work=work)
 
 @app.route("/account", methods=["GET", "POST"])
 def account():
