@@ -8,7 +8,7 @@ def index():
     homepage = "<h1>張綺庭Python網頁(+8)</h1>"
     homepage += "<a href=/mis>MIS</a><br>"
     homepage += "<a href=/today>顯示日期時間</a><br>"
-    homepage += "<a href='/welcome?nick=ting&pu=pu_value'>傳送使用者暱稱</a><br>"  # 修正了網址參數
+    homepage += "<a href='/welcome?nick=ting&work=學生'>傳送使用者暱稱</a><br>"  # 修正了網址參數
     homepage += "<a href=/account>網頁表單傳值</a><br>"
     homepage += "<a href=/about>綺庭簡介網頁</a><br>"
     return homepage
