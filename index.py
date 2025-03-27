@@ -8,29 +8,30 @@ def index():
     homepage = "<h1>張綺庭Python網頁(+8)</h1>"
     homepage += "<a href=/mis>MIS</a><br>"
     homepage += "<a href=/today>顯示日期時間</a><br>"
-    homepage += "<a href=/welcome?nick=ting&=pu>傳送使用者暱稱</a><br>"
+    homepage += "<a href='/welcome?nick=ting&pu=pu_value'>傳送使用者暱稱</a><br>"  # 修正了網址參數
     homepage += "<a href=/account>網頁表單傳值</a><br>"
     homepage += "<a href=/about>綺庭簡介網頁</a><br>"
     return homepage
 
 @app.route("/mis")
 def mis():
-	return "<h1>資訊管理導論</h1>"
+    return "<h1>資訊管理導論</h1>"
 
 @app.route("/today")
 def today():
     tz = timezone(timedelta(hours=+8))
-	now = datetime.now(tz)
-	return render_template("today.html",datetime=str(now))
+    now = datetime.now(tz)
+    return render_template("today.html", datetime=str(now))
 
 @app.route("/about")
 def me():
-	now = datetime.now()
-	return render_template("rwd.html",datetime=str(now))
+    tz = timezone(timedelta(hours=+8))  # 加上時區
+    now = datetime.now(tz)
+    return render_template("rwd.html", datetime=str(now))
 
 @app.route("/welcome", methods=["GET"])
 def welcome():
-    user = request.values.get("nick")
+    user = request.args.get("nick")  # 改為使用 request.args.get() 獲取 GET 參數
     return render_template("welcome.html", name=user)
 
 @app.route("/account", methods=["GET", "POST"])
@@ -38,11 +39,10 @@ def account():
     if request.method == "POST":
         user = request.form["user"]
         pwd = request.form["pwd"]
-        result = "您輸入的帳號是：" + user + "; 密碼為：" + pwd 
+        result = "您輸入的帳號是：" + user + "; 密碼為：" + pwd
         return result
     else:
         return render_template("account.html")
 
-
 if __name__ == "__main__":
-	app.run()
+    app.run()
